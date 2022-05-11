@@ -14,8 +14,6 @@ resource "aws_imagebuilder_image_pipeline" "main" {
 
     content {
       schedule_expression                = schedule.value.schedule_expression
-      pipeline_execution_start_condition = schedule.value.pipeline_execution_start_condition
-      timezone                           = schedule.value.timezone
     }
   }
 
