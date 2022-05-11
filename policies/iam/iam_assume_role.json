@@ -31,7 +31,7 @@
                 "ec2messages:SendReply",
                 "imagebuilder:GetComponent"
             ],
-            "Resource": [
+            "Resources": [
                 "*"
             ]
         },
@@ -41,7 +41,7 @@
                 "s3:List",
                 "s3:GetObject"
             ],
-            "Resource": [
+            "Resources": [
                 "*"
             ]
         },
@@ -50,7 +50,7 @@
             "Action": [
                 "s3:PutObject"
             ],
-            "Resource": [
+            "Resources": [
                 "arn:aws:s3:::${var.aws_s3_log_bucket}/image-builder/*"
             ]
         },
@@ -61,7 +61,7 @@
                 "logs:CreateLogGroup",
                 "logs:PutLogEvents"
             ],
-            "Resource": [
+            "Resources": [
                 "arn:aws:logs:*:*:log-group:/aws/imagebuilder/*"
             ]
         },
@@ -70,7 +70,7 @@
             "Action": [
                 "kms:Decrypt"
             ],
-            "Resource": [
+            "Resources": [
                 "*"
             ],
             "Condition": [
