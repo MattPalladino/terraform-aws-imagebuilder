@@ -98,16 +98,6 @@ resource "aws_imagebuilder_distribution_configuration" "main" {
       region                     = distribution.value.region
       license_configuration_arns = distribution.value.license_configuration_arns
 
-      dynamic "launch_template_configuration" {
-        for_each = distribution.value.launch_template_cfg != null ? [0] : []
-
-        content {
-          default            = distribution.value.launch_template_cfg.default
-          launch_template_id = distribution.value.launch_template_cfg.launch_template_id
-          account_id         = distribution.value.launch_template_cfg.account_id
-        }
-      }
-
       dynamic "ami_distribution_configuration" {
         for_each = distribution.value.ami_dist_cfg != null ? [0] : []
 
@@ -124,8 +114,6 @@ resource "aws_imagebuilder_distribution_configuration" "main" {
             content {
               user_ids                 = launch_permission.value.user_ids
               user_groups              = launch_permission.value.user_groups
-              organization_arns        = launch_permission.value.organization_arns
-              organizational_unit_arns = launch_permission.value.organizational_unit_arns
             }
           }
         }
@@ -148,20 +136,7 @@ resource "aws_imagebuilder_image_recipe" "main" {
     for_each = local.ordered_components
     content {
       component_arn = component.value.component_arn
-
-      dynamic "parameter" {
-        for_each = component.value.parameters != null ? component.value.parameters : []
-
-        content {
-          name  = parameter.value.name
-          value = parameter.value.value
-        }
-      }
     }
-  }
-
-  systems_manager_agent {
-    uninstall_after_build = var.imgrep_sysmanager_uninstall
   }
 
   dynamic "block_device_mapping" {

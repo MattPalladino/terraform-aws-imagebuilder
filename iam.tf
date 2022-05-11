@@ -11,7 +11,7 @@ resource "aws_iam_role" "main" {
   name  = "${var.imgb_stackname}-imagebuilder-role"
   path  = "/"
 
-  assume_role_policy  = file("${path.root}/policies/iam/iam_assume_role.json")
+  assume_role_policy  = file("${path.module}/policies/iam/iam_assume_role.json")
   managed_policy_arns = var.imgb_managed_policies
 }
 
@@ -48,4 +48,3 @@ resource "aws_iam_role_policy_attachment" "custom" {
   role       = aws_iam_role.main[0].name
   policy_arn = aws_iam_policy.custom[0].arn
 }
-
