@@ -339,5 +339,5 @@ variable "imgrep_working_dir" {
 variable "imgrep_user_data" {
   description = "Base64-encoded user data to provide commands when launching your build instance."
   type        = string
-  default     = null
+  default     = " "
 }
