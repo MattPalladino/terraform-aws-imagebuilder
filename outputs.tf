@@ -51,5 +51,3 @@ output "distribution_info" {
     tags         = aws_imagebuilder_distribution_configuration.main.tags_all
   } : null
 }
-
-

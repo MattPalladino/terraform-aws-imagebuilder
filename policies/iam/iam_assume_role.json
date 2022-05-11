@@ -3,92 +3,10 @@
     "Statement": [
         {
             "Effect": "Allow",
-            "Action": [
-                "ssm:DescribeAssociation",
-                "ssm:GetDeployablePatchSnapshotForInstance",
-                "ssm:GetDocument",
-                "ssm:DescribeDocument",
-                "ssm:GetManifest",
-                "ssm:GetParameter",
-                "ssm:GetParameters",
-                "ssm:ListAssociations",
-                "ssm:ListInstanceAssociations",
-                "ssm:PutInventory",
-                "ssm:PutComplianceItems",
-                "ssm:PutConfigurePackageResult",
-                "ssm:UpdateAssociationStatus",
-                "ssm:UpdateInstanceAssociationStatus",
-                "ssm:UpdateInstanceInformation",
-                "ssmmessages:CreateControlChannel",
-                "ssmmessages:CreateDataChannel",
-                "ssmmessages:OpenControlChannel",
-                "ssmmessages:OpenDataChannel",
-                "ec2messages:AcknowledgeMessage",
-                "ec2messages:DeleteMessage",
-                "ec2messages:FailMessage",
-                "ec2messages:GetEndpoint",
-                "ec2messages:GetMessages",
-                "ec2messages:SendReply",
-                "imagebuilder:GetComponent"
-            ],
-            "Resources": [
-                "*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:List",
-                "s3:GetObject"
-            ],
-            "Resources": [
-                "*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "s3:PutObject"
-            ],
-            "Resources": [
-                "arn:aws:s3:::${var.aws_s3_log_bucket}/image-builder/*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "logs:CreateLogStream",
-                "logs:CreateLogGroup",
-                "logs:PutLogEvents"
-            ],
-            "Resources": [
-                "arn:aws:logs:*:*:log-group:/aws/imagebuilder/*"
-            ]
-        },
-        {
-            "Effect": "Allow",
-            "Action": [
-                "kms:Decrypt"
-            ],
-            "Resources": [
-                "*"
-            ],
-            "Condition": [
-                {
-                    "ForAnyValue:StringEquals": {
-                        "kms:EncryptionContextKeys": [
-                            "aws:imagebuilder:arn"
-                        ]
-                    }
-                },
-                {
-                    "ForAnyValue:StringEquals": {
-                        "aws:CalledVia": [
-                            "imagebuilder.amazonaws.com"
-                        ]
-                    }
-                }
-            ]
+            "Principal": {
+                "Service": "imagebuilder.amazonaws.com"
+            },
+            "Action": "sts:AssumeRole"
         }
     ]
 }

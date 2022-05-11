@@ -2,7 +2,7 @@
 resource "aws_iam_instance_profile" "main" {
   count = var.imgb_custom_instance_profile == "" ? 1 : 0
   name  = "${var.imgb_stackname}-imagebuilder-profile"
-  role  = aws_iam_role.main[0].name
+  role  = length(aws_iam_role.main) > 0 ? aws_iam_role.main[0].name : var.imgb_custom_iam_role
 }
 
 # Default IAM role to use with imagebuilder
@@ -28,7 +28,7 @@ resource "aws_iam_policy" "s3logs" {
 resource "aws_iam_role_policy_attachment" "s3logs" {
   for_each = aws_iam_policy.s3logs
 
-  role       = aws_iam_role.main[0].name
+  role       = length(aws_iam_role.main) > 0 ? aws_iam_role.main[0].name : var.imgb_custom_iam_role
   policy_arn = aws_iam_policy.s3logs[each.key].arn
 }
 
