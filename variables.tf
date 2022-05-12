@@ -1,7 +1,7 @@
 ## General vars
 variable "region" {
   description = "The region to create the resources from this module."
-  default     = "us-east-1"
+  default     = "eu-central-1"
   type        = string
 }
 
@@ -267,7 +267,7 @@ variable "imgdistcfg_distribution" {
       }))
   }))
   default = [{
-    region = "us-east-1",
+    region = "eu-central-1",
     ami_dist_cfg = {
       name = "{{imagebuilder:buildDate}}"
     }
