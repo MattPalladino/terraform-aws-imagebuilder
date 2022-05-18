@@ -1,6 +1,10 @@
 # EC2 Image Builder Pipeline Module
 
-## 📕 Description 
+## Caveat Emptor
+This fork has some (breaking) changes with upstream, namely:
+- conversion from aws v4 to aws v3, due to compatibility issues
+
+## 📕 Description
 
 This module is designed to provide a full EC2 Image Builder workflow from pipeline creation through to generation of the AMI itself. It is also designed to be highly customizable by exposing most configuration attributes of the underlying resources; while at the same time this module can be ran with a minimal number of input variables in order to make generating several pipelines quickly a painless process. This module also creates the IAM resources necessary for the build/test stages of EC2 Image Builder to function properly.
 
