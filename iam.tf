@@ -17,7 +17,7 @@ resource "aws_iam_role" "main" {
 
 # Additional S3logs policy if logging is needed
 resource "aws_iam_policy" "s3logs" {
-  for_each = local.s3_buckets # Only create policy if there are S3 logging buckets that need the addtl permissions
+  # for_each = local.s3_buckets # Only create policy if there are S3 logging buckets that need the addtl permissions
 
   name        = "${var.imgb_stackname}-imagebuilder-s3logs"
   path        = "/"
@@ -26,10 +26,10 @@ resource "aws_iam_policy" "s3logs" {
 }
 
 resource "aws_iam_role_policy_attachment" "s3logs" {
-  for_each = aws_iam_policy.s3logs
+  # for_each = aws_iam_policy.s3logs
 
   role       = length(aws_iam_role.main) > 0 ? aws_iam_role.main[0].name : var.imgb_custom_iam_role
-  policy_arn = aws_iam_policy.s3logs[each.key].arn
+  policy_arn = aws_iam_policy.s3logs.arn
 }
 
 # Additional custom policy if extra user-specified permissions are needed

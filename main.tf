@@ -1,6 +1,7 @@
 locals {
   # Create set of S3 bucket ARNs from the names derived from logging attribute objects
-  s3_buckets = toset([for o in var.imginfracfg_logging : "arn:aws:s3:::${o.s3_logs.s3_bucket_name}/*"])
+  # s3_buckets = toset([for o in var.imginfracfg_logging : "arn:aws:s3:::${o.s3_logs.s3_bucket_name}/*"])
+  s3_buckets = "arn:aws:s3:::${var.imginfracfg_logging.s3_logs.s3_bucket_name}/*"
 
   # Create a joined set of component objects from both the managed and created components, derived from their respective input variables
   components = concat([for k, o in var.imgb_components : {

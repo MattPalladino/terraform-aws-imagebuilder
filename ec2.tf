@@ -54,15 +54,15 @@ resource "aws_imagebuilder_infrastructure_configuration" "main" {
   subnet_id                     = var.imginfracfg_subnet_id
   terminate_instance_on_failure = var.imginfracfg_term_on_fail
 
-  dynamic "logging" {
-    for_each = var.imginfracfg_logging
-    content {
+  # dynamic "logging" {
+  logging {
+    # for_each = var.imginfracfg_logging
       s3_logs {
-        s3_bucket_name = logging.value.s3_bucket_name
-        s3_key_prefix  = logging.value.s3_key_prefix
+        s3_bucket_name = var.imginfracfg_logging.s3_logs.s3_bucket_name
+        s3_key_prefix  = var.imginfracfg_logging.s3_logs.s3_key_prefix
       }
     }
-  }
+
 
   tags = var.imginfracfg_tags
 }

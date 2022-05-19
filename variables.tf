@@ -150,13 +150,13 @@ variable "imginfracfg_term_on_fail" {
 
 variable "imginfracfg_logging" {
   description = "A set of objects containing logging options for the infrastructure configuration. Leave default for no logging."
-  type = set(object({
+  type = object({
     s3_logs = object({
       s3_bucket_name = string
       s3_key_prefix  = optional(string)
     })
-  }))
-  default = []
+  })
+  # default = []
 }
 
 variable "imginfracfg_tags" {
